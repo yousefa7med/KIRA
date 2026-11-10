@@ -14,7 +14,7 @@ class Kira extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       locale: const Locale('ar'),
-
+      debugShowCheckedModeBanner: false,
       supportedLocales: const [Locale('ar')],
 
       localizationsDelegates: const [
@@ -25,6 +25,7 @@ class Kira extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: AppTheme.lightTheme,
       onGenerateRoute: AppRouter.generateRoute,
+      initialRoute: AppRoutes.login,
     );
   }
 }

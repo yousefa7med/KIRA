@@ -1,78 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:kira/core/utilities/App_colors.dart';
 
 abstract class AppTextStyle {
-  static const String _fontFamily = "NotoSans";
+  static const String _fontFamily = "NotoSansArabic";
   // <========================= Regular style ==============================>
-  static TextStyle regular12 = const TextStyle(
+  static const TextStyle regular12 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.normal,
     fontSize: 12,
   );
-  static TextStyle regular16 = const TextStyle(
+  static const TextStyle regular16 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.normal,
     fontSize: 16,
   );
-  static TextStyle regular20 = const TextStyle(
+  static const TextStyle regular20 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.normal,
     fontSize: 20,
   );
-  static TextStyle regular24 = const TextStyle(
+  static const TextStyle regular24 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.normal,
     fontSize: 24,
   );
 
   // <========================= Medium style ==============================>
-  static TextStyle medium8 = const TextStyle(
+  static const TextStyle medium8 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w500,
     fontSize: 8,
   );
-  static TextStyle medium12 = const TextStyle(
+  static const TextStyle medium12 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w500,
     fontSize: 12,
   );
-  static TextStyle medium14 = const TextStyle(
+  static const TextStyle medium14 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w500,
     fontSize: 14,
   );
-  static TextStyle medium16 = const TextStyle(
+  static const TextStyle medium16 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w500,
     fontSize: 16,
   );
-  static TextStyle medium20 = const TextStyle(
+  static const TextStyle medium20 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w500,
     fontSize: 20,
   );
-  static TextStyle medium24 = const TextStyle(
+  static const TextStyle medium24 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w500,
     fontSize: 24,
   );
 
   // <========================= semi Bold style ==============================>
-  static TextStyle semiBold16 = const TextStyle(
+  static const TextStyle semiBold12 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w600,
+    fontSize: 12,
+    color: AppColors.primary,
+    decoration: TextDecoration.underline,
+  );
+  static const TextStyle semiBold16 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 16,
   );
-  static TextStyle semiBold20 = const TextStyle(
+  static const TextStyle semiBold20 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 20,
   );
-  static TextStyle semiBold22 = const TextStyle(
+  static const TextStyle semiBold22 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 22,
   );
-  static TextStyle semiBold24 = const TextStyle(
+  static const TextStyle semiBold24 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 24,
@@ -80,24 +88,31 @@ abstract class AppTextStyle {
 
   // <========================= bold style ==============================>
 
-  static TextStyle bold20 = const TextStyle(
+  static const TextStyle bold20 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.bold,
     fontSize: 20,
   );
-  static TextStyle bold24 = const TextStyle(
+  static const TextStyle bold24 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.bold,
     fontSize: 24,
   );
-  static TextStyle bold28 = const TextStyle(
+  static const TextStyle bold28 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.bold,
     fontSize: 28,
   );
-  static TextStyle bold36 = const TextStyle(
+  static const TextStyle bold36 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.bold,
     fontSize: 36,
+  );
+  static const TextStyle bold46 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 11.5,
+    color: AppColors.primary,
+    fontSize: 46,
   );
 }
