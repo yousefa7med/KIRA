@@ -19,6 +19,7 @@ abstract class AppTheme {
 
       onSurface: AppColors.black,
     ),
+
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
@@ -60,6 +61,17 @@ abstract class AppTheme {
   // <=========================Dark Theme==============================>
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
+    colorScheme: const ColorScheme(
+      brightness: Brightness.dark,
+      primary: AppColors.primary,
+      onPrimary: AppColors.white,
+      secondary: AppColors.secondary,
+      onSecondary: AppColors.white,
+      error: AppColors.error,
+      onError: AppColors.white,
+      surface: AppColors.darkGreen,
+      onSurface: AppColors.white,
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,

@@ -12,6 +12,10 @@ class Assets {
 
   static const String iconsChat = "assets/icons/chat.svg";
 
+  static const String iconsEye = "assets/icons/Eye.svg";
+
+  static const String iconsEyeSlash = "assets/icons/EyeSlash.svg";
+
   static const String iconsList = "assets/icons/list.svg";
 
   static const String iconsTrue = "assets/icons/true.svg";
