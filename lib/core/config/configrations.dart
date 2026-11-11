@@ -7,6 +7,8 @@ import 'package:kira/features/auth/presentation/views/signup_step_one_view.dart'
 import 'package:kira/features/auth/presentation/views/signup_step_three_view.dart';
 import 'package:kira/features/auth/presentation/views/signup_step_two_view.dart';
 
+final authCubit = AuthCubit();
+
 class AppRouter {
   static Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -19,16 +21,17 @@ class AppRouter {
       case AppRoutes.login:
         return pageRouteBuilderMethod(
           settings: settings,
-          pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
-            create: (context) => AuthCubit(),
-            child: const LoginView(),
-          ),
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              BlocProvider.value(value: authCubit, child: const LoginView()),
         );
       case AppRoutes.signupStep1:
         return pageRouteBuilderMethod(
           settings: settings,
           pageBuilder: (context, animation, secondaryAnimation) =>
-              const SignupStepOneView(),
+              BlocProvider.value(
+                value: authCubit,
+                child: const SignupStepOneView(),
+              ),
         );
       case AppRoutes.signupStep2:
         return pageRouteBuilderMethod(

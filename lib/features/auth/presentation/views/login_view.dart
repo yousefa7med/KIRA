@@ -86,7 +86,7 @@ class _LoginViewState extends State<LoginView> {
                                   textAlign: TextAlign.start,
                                 ),
                               ),
-                              const Gap(8),
+                              const Gap(4),
                               AppTextFormField(
                                 label: "البريد الالكتروني",
                                 controller: emailController,
@@ -103,7 +103,7 @@ class _LoginViewState extends State<LoginView> {
                                   textAlign: TextAlign.start,
                                 ),
                               ),
-                              const Gap(8),
+                              const Gap(4),
                               AppTextFormField(
                                 label: "كلمة المرور",
                                 isPasswordField: true,
