@@ -62,13 +62,17 @@ abstract class AppTextStyle {
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 12,
-    color: AppColors.primary,
-    decoration: TextDecoration.underline,
+
   );
   static const TextStyle semiBold16 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 16,
+  );
+  static const TextStyle semiBold18 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w600,
+    fontSize: 18,
   );
   static const TextStyle semiBold20 = TextStyle(
     fontFamily: _fontFamily,
@@ -88,6 +92,11 @@ abstract class AppTextStyle {
 
   // <========================= bold style ==============================>
 
+  static const TextStyle bold12 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.bold,
+    fontSize: 12,
+  );
   static const TextStyle bold20 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.bold,
@@ -114,5 +123,13 @@ abstract class AppTextStyle {
     letterSpacing: 11.5,
     color: AppColors.primary,
     fontSize: 46,
+  );
+
+  // <========================= extra bold style ==============================>
+  static const TextStyle extraBold14 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w800,
+    fontSize: 14,
+    color: AppColors.line,
   );
 }

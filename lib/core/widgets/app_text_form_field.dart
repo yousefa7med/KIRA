@@ -27,7 +27,7 @@ class AppTextFormField extends StatefulWidget {
 }
 
 class _AppTextFormFieldState extends State<AppTextFormField> {
-  bool obscure = false;
+  bool obscure = true;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -53,6 +53,12 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                 },
                 icon: SvgPicture.asset(
                   obscure ? Assets.iconsEye : Assets.iconsEyeSlash,
+
+                  height: 24,
+                  colorFilter: const ColorFilter.mode(
+                    AppColors.line,
+                    BlendMode.srcIn,
+                  ),
                 ),
               )
             : null,

@@ -26,6 +26,8 @@ class Assets {
 
   static const String iconsX = "assets/icons/X.svg";
 
+  static const String logoGoogleIMG = "assets/logo/googleIMG.png";
+
   static const String logoKiraSymbol = "assets/logo/kira-symbol.svg";
 
   static const String logoKiraSymbolMonoDark = "assets/logo/kira-symbol-mono-dark.svg";

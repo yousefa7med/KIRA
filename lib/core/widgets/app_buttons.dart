@@ -8,15 +8,7 @@ class AppButtons extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
 
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-   
-        ),
-
-        child: child,
-      ),
+      child: ElevatedButton(onPressed: () {}, child: child),
     );
   }
 }

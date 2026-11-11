@@ -22,11 +22,27 @@ abstract class AppTheme {
 
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        disabledForegroundColor: AppColors.primary,
+        // disabledBackgroundColor: AppColors.accent,
         backgroundColor: AppColors.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.circular(8),
         ),
         foregroundColor: AppColors.white,
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+
+        backgroundColor: AppColors.white,
+        side: const BorderSide(
+          color: AppColors.primary,
+          width: 2.5,
+          strokeAlign: 0,
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
       ),
     ),
     appBarTheme: const AppBarTheme(

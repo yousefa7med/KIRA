@@ -13,6 +13,15 @@ class Kira extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      builder: (context, child) {
+        // !temp!
+        return MediaQuery(
+          data: MediaQuery.of(
+            context,
+          ).copyWith(textScaler: TextScaler.noScaling),
+          child: child!,
+        );
+      },
       locale: const Locale('ar'),
       debugShowCheckedModeBanner: false,
       supportedLocales: const [Locale('ar')],
