@@ -8,14 +8,22 @@ class GoogleSignInButton extends StatelessWidget {
   final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: isLoading ? null : onPressed,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text("تسجيل باستخدام ", style: AppTextStyle.semiBold18),
-          Image.asset(Assets.logoGoogleIMG, height: 30),
-        ],
+    return SizedBox(
+      width: double.infinity,
+      child: OutlinedButton(
+        onPressed: isLoading ? null : onPressed,
+        child: isLoading
+            ? const Text(
+                "جار تسجيل الدخول ....",
+                style: AppTextStyle.semiBold18,
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("تسجيل باستخدام ", style: AppTextStyle.semiBold18),
+                  Image.asset(Assets.logoGoogleIMG, height: 30),
+                ],
+              ),
       ),
     );
   }
