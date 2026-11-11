@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kira/core/transitions/page_route_builder_method.dart';
+import 'package:kira/features/auth/controller/cubit/auth_cubit.dart';
 import 'package:kira/features/auth/presentation/views/login_view.dart';
 import 'package:kira/features/auth/presentation/views/signup_step_one_view.dart';
 import 'package:kira/features/auth/presentation/views/signup_step_three_view.dart';
@@ -17,8 +19,10 @@ class AppRouter {
       case AppRoutes.login:
         return pageRouteBuilderMethod(
           settings: settings,
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              const LoginView(),
+          pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
+            create: (context) => AuthCubit(),
+            child: const LoginView(),
+          ),
         );
       case AppRoutes.signupStep1:
         return pageRouteBuilderMethod(

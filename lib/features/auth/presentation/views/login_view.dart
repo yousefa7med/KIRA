@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:kira/core/config/configrations.dart';
+import 'package:kira/core/navigations/navigations.dart';
 import 'package:kira/core/utilities/App_colors.dart';
 import 'package:kira/core/utilities/app_text_style.dart';
 import 'package:kira/core/utilities/assets.dart';
 import 'package:kira/core/widgets/app_buttons.dart';
 import 'package:kira/core/widgets/app_text_form_field.dart';
+import 'package:kira/features/auth/controller/cubit/auth_cubit.dart';
 import 'package:kira/features/auth/presentation/widgets/google_sign_in_button.dart';
 import 'package:kira/features/auth/presentation/widgets/login_divider.dart';
 
@@ -17,6 +21,25 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  late final TextEditingController emailController;
+  late final TextEditingController passwordController;
+  late final GlobalKey<FormState> formKey;
+  @override
+  void initState() {
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    formKey = GlobalKey<FormState>();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -36,6 +59,7 @@ class _LoginViewState extends State<LoginView> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Form(
+                          key: formKey,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -63,8 +87,9 @@ class _LoginViewState extends State<LoginView> {
                                 ),
                               ),
                               const Gap(8),
-                              const AppTextFormField(
+                              AppTextFormField(
                                 label: "البريد الالكتروني",
+                                controller: emailController,
                               ),
                               const Gap(6),
                               Align(
@@ -79,9 +104,10 @@ class _LoginViewState extends State<LoginView> {
                                 ),
                               ),
                               const Gap(8),
-                              const AppTextFormField(
+                              AppTextFormField(
                                 label: "كلمة المرور",
                                 isPasswordField: true,
+                                controller: passwordController,
                               ),
                               const Gap(2),
 
@@ -97,17 +123,78 @@ class _LoginViewState extends State<LoginView> {
                               ),
                               const Gap(28),
 
-                              const AppButtons(
-                                child: Text(
-                                  "تسجيل الدخول",
-                                  style: AppTextStyle.semiBold18,
-                                ),
+                              BlocBuilder<AuthCubit, AuthState>(
+                                builder: (context, state) {
+                                  return AppButtons(
+                                    isLoading: state.isLoading(
+                                      AuthAction.login,
+                                    ),
+                                    onPressed: state.isBusy
+                                        ? null
+                                        : () async {
+                                            if (formKey.currentState!
+                                                .validate()) {
+                                              final isSeccess = await context
+                                                  .read<AuthCubit>()
+                                                  .login(
+                                                    emailController.text,
+                                                    passwordController.text,
+                                                  );
+                                              isSeccess
+                                                  ? AppNavigation.pushName(
+                                                      context: context,
+                                                      route:
+                                                          AppRoutes.signupStep1,
+                                                    )
+                                                  : ScaffoldMessenger.of(
+                                                      context,
+                                                    ).showSnackBar(
+                                                      const SnackBar(
+                                                        content: Text("data"),
+                                                      ),
+                                                    );
+                                            }
+                                          },
+                                    child: const Text(
+                                      "تسجيل الدخول",
+                                      style: AppTextStyle.semiBold18,
+                                    ),
+                                  );
+                                },
                               ),
                               const Gap(6),
 
                               const LoginDivider(),
                               const Gap(6),
-                              const GoogleSignInButton(),
+                              BlocBuilder<AuthCubit, AuthState>(
+                                builder: (context, state) {
+                                  return GoogleSignInButton(
+                                    onPressed: state.isBusy
+                                        ? null
+                                        : () async {
+                                            final isSeccess = await context
+                                                .read<AuthCubit>()
+                                                .signinWithGoogle();
+                                            isSeccess
+                                                ? AppNavigation.pushName(
+                                                    context: context,
+                                                    route:
+                                                        AppRoutes.signupStep1,
+                                                  )
+                                                : ScaffoldMessenger.of(
+                                                    context,
+                                                  ).showSnackBar(
+                                                    const SnackBar(
+                                                      content: Text("data"),
+                                                    ),
+                                                  );
+                                          },
+                                    isLoading: state.isLoading(
+                                      AuthAction.googleLogin,
+                                    ),
+                                  );
+                                },
+                              ),
                               const Gap(12),
                             ],
                           ),

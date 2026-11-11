@@ -33,17 +33,28 @@ abstract class AppTheme {
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      style:
+          OutlinedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            disabledForegroundColor: AppColors.lightGrey,
+            backgroundColor: AppColors.white,
 
-        backgroundColor: AppColors.white,
-        side: const BorderSide(
-          color: AppColors.primary,
-          width: 2.5,
-          strokeAlign: 0,
-        ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-      ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6),
+            ),
+          ).copyWith(
+            side: WidgetStateProperty.resolveWith((states) {
+              if (states.contains(WidgetState.disabled)) {
+                return const BorderSide(color: AppColors.lightGrey, width: 1.5);
+              }
+
+              return const BorderSide(
+                color: AppColors.primary,
+                width: 2.5,
+                strokeAlign: 0,
+              );
+            }),
+          ),
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.background,
