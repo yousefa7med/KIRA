@@ -31,13 +31,13 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: AppTextStyle.regular12,
+      style: AppTextStyle.regular14,
       controller: widget.controller,
       validator: widget.validator,
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
       onChanged: widget.onChange,
-      obscureText: obscure,
+      obscureText: widget.isPasswordField ? obscure : false,
       cursorColor: AppColors.primary,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(

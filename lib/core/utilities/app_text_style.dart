@@ -4,10 +4,20 @@ import 'package:kira/core/utilities/App_colors.dart';
 abstract class AppTextStyle {
   static const String _fontFamily = "NotoSansArabic";
   // <========================= Regular style ==============================>
+  static const TextStyle regular10 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.normal,
+    fontSize: 10,
+  );
   static const TextStyle regular12 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.normal,
     fontSize: 12,
+  );
+  static const TextStyle regular14 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.normal,
+    fontSize: 14,
   );
   static const TextStyle regular16 = TextStyle(
     fontFamily: _fontFamily,
@@ -62,7 +72,6 @@ abstract class AppTextStyle {
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 12,
-
   );
   static const TextStyle semiBold16 = TextStyle(
     fontFamily: _fontFamily,

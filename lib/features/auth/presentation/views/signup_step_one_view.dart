@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:kira/core/config/configrations.dart';
 import 'package:kira/core/navigations/navigations.dart';
 import 'package:kira/core/utilities/App_colors.dart';
 import 'package:kira/core/utilities/app_text_style.dart';
 import 'package:kira/core/utilities/assets.dart';
 import 'package:kira/core/widgets/app_buttons.dart';
 import 'package:kira/core/widgets/app_text_form_field.dart';
+import 'package:kira/features/auth/controller/cubit/auth_cubit.dart';
 import 'package:kira/features/auth/presentation/widgets/signup_page_indicator.dart';
 
 class SignupStepOneView extends StatefulWidget {
@@ -24,10 +27,11 @@ class _SignupStepOneViewState extends State<SignupStepOneView> {
   late final GlobalKey<FormState> formKey;
   @override
   void initState() {
-    userNameController = TextEditingController();
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-    confirmPasswordController = TextEditingController();
+    final user = context.read<AuthCubit>().user;
+    userNameController = TextEditingController(text: user.username);
+    emailController = TextEditingController(text: user.email);
+    passwordController = TextEditingController(text: user.password);
+    confirmPasswordController = TextEditingController(text: user.password);
     formKey = GlobalKey<FormState>();
 
     super.initState();
@@ -116,6 +120,7 @@ class _SignupStepOneViewState extends State<SignupStepOneView> {
                           AppTextFormField(
                             label: "كلمة المرور",
                             controller: passwordController,
+                            isPasswordField: true,
                           ),
                           const Gap(6),
                           Text(
@@ -128,6 +133,7 @@ class _SignupStepOneViewState extends State<SignupStepOneView> {
                           AppTextFormField(
                             label: "تأكيد كلمة المرور ",
                             controller: confirmPasswordController,
+                            isPasswordField: true,
                           ),
                           const Gap(56),
                         ],
@@ -139,7 +145,20 @@ class _SignupStepOneViewState extends State<SignupStepOneView> {
                               "التالي",
                               style: AppTextStyle.semiBold18,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              context.read<AuthCubit>().user = context
+                                  .read<AuthCubit>()
+                                  .user
+                                  .copyWith(
+                                    username: userNameController.text,
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                  );
+                              AppNavigation.pushName(
+                                context: context,
+                                route: AppRoutes.signupStep2,
+                              );
+                            },
                           ),
                           const Gap(100),
                         ],
