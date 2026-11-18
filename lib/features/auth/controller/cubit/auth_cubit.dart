@@ -5,7 +5,7 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
-
+  SignUpModel user = SignUpModel();
   Future<bool> login(String email, String password) async {
     emit(state.copyWith(activeAction: AuthAction.login));
     await Future.delayed(const Duration(seconds: 2), () {});
@@ -14,7 +14,7 @@ class AuthCubit extends Cubit<AuthState> {
     return true;
   }
 
-  bool signup(SignUpModel user) {
+  bool signup() {
     emit(state.copyWith(activeAction: AuthAction.signup));
 
     Future.delayed(const Duration(seconds: 2), () {});
@@ -26,7 +26,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<bool> signinWithGoogle() async {
     emit(state.copyWith(activeAction: AuthAction.googleLogin));
 
-  await  Future.delayed(const Duration(seconds: 2), () {});
+    await Future.delayed(const Duration(seconds: 2), () {});
     emit(state.copyWith(activeAction: AuthAction.idle));
 
     return true;

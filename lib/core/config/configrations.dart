@@ -37,13 +37,19 @@ class AppRouter {
         return pageRouteBuilderMethod(
           settings: settings,
           pageBuilder: (context, animation, secondaryAnimation) =>
-              const SignupStepTwoView(),
+              BlocProvider.value(
+                value: authCubit,
+                child: const SignupStepTwoView(),
+              ),
         );
       case AppRoutes.signupStep3:
         return pageRouteBuilderMethod(
           settings: settings,
           pageBuilder: (context, animation, secondaryAnimation) =>
-              const SignupStepThreeView(),
+              BlocProvider.value(
+                value: authCubit,
+                child: const SignupStepThreeView(),
+              ),
         );
 
       default:
