@@ -21,7 +21,7 @@ class GoogleSignInButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text("تسجيل باستخدام ", style: AppTextStyle.semiBold18),
-                  Image.asset(Assets.logoGoogleIMG, height: 30),
+                  Image.asset(Assets.logoGoogleIMG, height: 26),
                 ],
               ),
       ),

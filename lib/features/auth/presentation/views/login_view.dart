@@ -179,7 +179,7 @@ class _LoginViewState extends State<LoginView> {
                                                 ? AppNavigation.pushName(
                                                     context: context,
                                                     route:
-                                                        AppRoutes.signupStep1,
+                                                        AppRoutes.signupStep2,
                                                   )
                                                 : ScaffoldMessenger.of(
                                                     context,
