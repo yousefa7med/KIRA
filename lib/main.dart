@@ -1,6 +1,8 @@
+import 'package:flutter_country_selector/flutter_country_selector.dart';
 import 'package:kira/core/config/configrations.dart';
 import 'package:kira/core/utilities/app_theme.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:phone_form_field/phone_form_field.dart';
 
 void main() {
   runApp(const Kira());
@@ -25,7 +27,12 @@ class Kira extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       supportedLocales: const [Locale('ar')],
 
-      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      localizationsDelegates: const [
+        ...GlobalMaterialLocalizations.delegates,
+        ...PhoneFieldLocalization.delegates,
+        CountrySelectorLocalization.delegate,
+      ],
+
       themeMode: ThemeMode.light,
       theme: AppTheme.lightTheme,
       onGenerateRoute: AppRouter.generateRoute,

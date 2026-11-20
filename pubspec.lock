@@ -127,7 +127,7 @@ packages:
     source: hosted
     version: "9.1.1"
   flutter_country_selector:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_country_selector
       sha256: "780ad05f4a57b1f2b86c87edc9f4ed691f5e6ff4c082879b8cbf25fe62cc1dd4"
