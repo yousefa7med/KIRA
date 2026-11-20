@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 abstract class AppColors {
   static const primary = Color(0xff0B5C6B);

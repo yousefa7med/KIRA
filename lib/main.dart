@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:kira/core/config/configrations.dart';
 import 'package:kira/core/utilities/app_theme.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   runApp(const Kira());
@@ -26,11 +25,7 @@ class Kira extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       supportedLocales: const [Locale('ar')],
 
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
       themeMode: ThemeMode.light,
       theme: AppTheme.lightTheme,
       onGenerateRoute: AppRouter.generateRoute,

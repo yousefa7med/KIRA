@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:kira/core/transitions/slide_transation_builder.dart';
 
 PageRouteBuilder<T> pageRouteBuilderMethod<T>({
