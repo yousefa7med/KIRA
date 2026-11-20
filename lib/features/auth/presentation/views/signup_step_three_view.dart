@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -48,124 +48,128 @@ class _SignupStepThreeViewState extends State<SignupStepThreeView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constrains) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constrains.maxHeight),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Form(
-                        key: formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+
+      child: Scaffold(
+        body: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constrains) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constrains.maxHeight),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Form(
+                          key: formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Gap(8),
+                              const SignupPageIndicator(stage: 3),
+                              const Gap(24),
+                              IconButton(
+                                onPressed: () {
+                                  AppNavigation.pop(context);
+                                },
+                                icon: SvgPicture.asset(
+                                  Assets.iconsArrowBack,
+                                  height: 28,
+                                ),
+                              ),
+                              const Gap(12),
+                              const Text(
+                                "خلّينا نتعرف عليك أكتر.",
+                                style: AppTextStyle.bold28,
+                              ),
+                              const Gap(6),
+                              const Text(
+                                "معلومات بسيطة تساعدنا نقدم لك تحليلات تناسب طبيعة عملك.",
+                                style: AppTextStyle.regular16,
+                              ),
+                              const Gap(30),
+                              Text(
+                                "مجال العمل",
+                                style: AppTextStyle.semiBold20.copyWith(
+                                  color: AppColors.primary,
+                                ),
+                              ),
+                              const Gap(4),
+                              AppDropDownMenu(
+                                items: const ['يوسف', "جورج", "انور", "انيس"],
+                                hintText: "مجال العمل (Industry)",
+                              ),
+                              const Gap(6),
+                              Text(
+                                "النشاط التجاري",
+                                style: AppTextStyle.semiBold20.copyWith(
+                                  color: AppColors.primary,
+                                ),
+                              ),
+                              const Gap(4),
+                              AppDropDownMenu(
+                                items: const ['يوسف', "جورج", "انور", "انيس"],
+                                hintText: "النشاط التجاري (Business Domain)",
+                              ),
+                              const Gap(6),
+                              Text(
+                                "المسمي الوظيفي",
+                                style: AppTextStyle.semiBold20.copyWith(
+                                  color: AppColors.primary,
+                                ),
+                              ),
+                              const Gap(4),
+                              AppTextFormField(
+                                label: "المسمي الوظيفي",
+                                controller: passwordController,
+                              ),
+                              const Gap(6),
+                              Text(
+                                "الشركة",
+                                style: AppTextStyle.semiBold20.copyWith(
+                                  color: AppColors.primary,
+                                ),
+                              ),
+                              const Gap(4),
+                              AppTextFormField(
+                                label: "اسم الشركة",
+                                controller: confirmPasswordController,
+                              ),
+                              const Gap(56),
+                            ],
+                          ),
+                        ),
+                        Column(
                           children: [
-                            const Gap(8),
-                            const SignupPageIndicator(stage: 3),
-                            const Gap(24),
-                            IconButton(
+                            AppButtons(
+                              child: const Text(
+                                "التالي",
+                                style: AppTextStyle.semiBold18,
+                              ),
                               onPressed: () {
-                                AppNavigation.pop(context);
+                                context.read<AuthCubit>().user = context
+                                    .read<AuthCubit>()
+                                    .user
+                                    .copyWith(
+                                      username: userNameController.text,
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                    );
                               },
-                              icon: SvgPicture.asset(
-                                Assets.iconsArrowBack,
-                                height: 28,
-                              ),
                             ),
-                            const Gap(12),
-                            const Text(
-                              "خلّينا نتعرف عليك أكتر.",
-                              style: AppTextStyle.bold28,
-                            ),
-                            const Gap(6),
-                            const Text(
-                              "معلومات بسيطة تساعدنا نقدم لك تحليلات تناسب طبيعة عملك.",
-                              style: AppTextStyle.regular16,
-                            ),
-                            const Gap(30),
-                            Text(
-                              "مجال العمل",
-                              style: AppTextStyle.semiBold20.copyWith(
-                                color: AppColors.primary,
-                              ),
-                            ),
-                            const Gap(4),
-                            AppDropDownMenu(
-                              items: const ['يوسف', "جورج", "انور", "انيس"],
-                              hintText: "مجال العمل (Industry)",
-                            ),
-                            const Gap(6),
-                            Text(
-                              "النشاط التجاري",
-                              style: AppTextStyle.semiBold20.copyWith(
-                                color: AppColors.primary,
-                              ),
-                            ),
-                            const Gap(4),
-                            AppDropDownMenu(
-                              items: const ['يوسف', "جورج", "انور", "انيس"],
-                              hintText: "النشاط التجاري (Business Domain)",
-                            ),
-                            const Gap(6),
-                            Text(
-                              "المسمي الوظيفي",
-                              style: AppTextStyle.semiBold20.copyWith(
-                                color: AppColors.primary,
-                              ),
-                            ),
-                            const Gap(4),
-                            AppTextFormField(
-                              label: "المسمي الوظيفي",
-                              controller: passwordController,
-                            ),
-                            const Gap(6),
-                            Text(
-                              "الشركة",
-                              style: AppTextStyle.semiBold20.copyWith(
-                                color: AppColors.primary,
-                              ),
-                            ),
-                            const Gap(4),
-                            AppTextFormField(
-                              label: "اسم الشركة",
-                              controller: confirmPasswordController,
-                            ),
-                            const Gap(56),
+                            const Gap(100),
                           ],
                         ),
-                      ),
-                      Column(
-                        children: [
-                          AppButtons(
-                            child: const Text(
-                              "التالي",
-                              style: AppTextStyle.semiBold18,
-                            ),
-                            onPressed: () {
-                              context.read<AuthCubit>().user = context
-                                  .read<AuthCubit>()
-                                  .user
-                                  .copyWith(
-                                    username: userNameController.text,
-                                    email: emailController.text,
-                                    password: passwordController.text,
-                                  );
-                            },
-                          ),
-                          const Gap(100),
-                        ],
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );

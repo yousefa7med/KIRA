@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -48,127 +48,131 @@ class _SignupStepOneViewState extends State<SignupStepOneView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, rains) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: rains.maxHeight),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Gap(8),
-                          const SignupPageIndicator(stage: 1),
-                          const Gap(24),
-                          IconButton(
-                            onPressed: () {
-                              AppNavigation.pop(context);
-                            },
-                            icon: SvgPicture.asset(
-                              Assets.iconsArrowBack,
-                              height: 28,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+
+      child: Scaffold(
+        body: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, rains) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: rains.maxHeight),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Gap(8),
+                            const SignupPageIndicator(stage: 1),
+                            const Gap(24),
+                            IconButton(
+                              onPressed: () {
+                                AppNavigation.pop(context);
+                              },
+                              icon: SvgPicture.asset(
+                                Assets.iconsArrowBack,
+                                height: 28,
+                              ),
                             ),
-                          ),
-                          const Gap(12),
-                          const Text(
-                            "ابدأ بفهم شغلك اليوم",
-                            style: AppTextStyle.bold28,
-                          ),
-                          const Gap(6),
-                          const Text(
-                            "أنشئ حسابك وارفع أول ملف، وسنجهّز لك تحليلاً بلغة بسيطة.",
-                            style: AppTextStyle.regular16,
-                          ),
-                          const Gap(30),
-                          Text(
-                            "اسم المستخدم",
-                            style: AppTextStyle.semiBold20.copyWith(
-                              color: AppColors.primary,
+                            const Gap(12),
+                            const Text(
+                              "ابدأ بفهم شغلك اليوم",
+                              style: AppTextStyle.bold28,
                             ),
-                          ),
-                          const Gap(4),
-                          AppTextFormField(
-                            label: "اسم المستخدم",
-                            controller: userNameController,
-                          ),
-                          const Gap(6),
-                          Text(
-                            "البريد الالكتروني",
-                            style: AppTextStyle.semiBold20.copyWith(
-                              color: AppColors.primary,
+                            const Gap(6),
+                            const Text(
+                              "أنشئ حسابك وارفع أول ملف، وسنجهّز لك تحليلاً بلغة بسيطة.",
+                              style: AppTextStyle.regular16,
                             ),
-                          ),
-                          const Gap(4),
-                          AppTextFormField(
-                            label: "البريد الالكتروني",
-                            controller: emailController,
-                          ),
-                          const Gap(6),
-                          Text(
-                            "كلمة المرور",
-                            style: AppTextStyle.semiBold20.copyWith(
-                              color: AppColors.primary,
+                            const Gap(30),
+                            Text(
+                              "اسم المستخدم",
+                              style: AppTextStyle.semiBold20.copyWith(
+                                color: AppColors.primary,
+                              ),
                             ),
-                          ),
-                          const Gap(4),
-                          AppTextFormField(
-                            label: "كلمة المرور",
-                            controller: passwordController,
-                            isPasswordField: true,
-                          ),
-                          const Gap(6),
-                          Text(
-                            "تأكيد كلمة المرور",
-                            style: AppTextStyle.semiBold20.copyWith(
-                              color: AppColors.primary,
+                            const Gap(4),
+                            AppTextFormField(
+                              label: "اسم المستخدم",
+                              controller: userNameController,
                             ),
-                          ),
-                          const Gap(4),
-                          AppTextFormField(
-                            label: "تأكيد كلمة المرور ",
-                            controller: confirmPasswordController,
-                            isPasswordField: true,
-                          ),
-                          const Gap(56),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          AppButtons(
-                            child: const Text(
-                              "التالي",
-                              style: AppTextStyle.semiBold18,
+                            const Gap(6),
+                            Text(
+                              "البريد الالكتروني",
+                              style: AppTextStyle.semiBold20.copyWith(
+                                color: AppColors.primary,
+                              ),
                             ),
-                            onPressed: () {
-                              context.read<AuthCubit>().user = context
-                                  .read<AuthCubit>()
-                                  .user
-                                  .copyWith(
-                                    username: userNameController.text,
-                                    email: emailController.text,
-                                    password: passwordController.text,
-                                  );
-                              AppNavigation.pushName(
-                                context: context,
-                                route: AppRoutes.signupStep2,
-                              );
-                            },
-                          ),
-                          const Gap(100),
-                        ],
-                      ),
-                    ],
+                            const Gap(4),
+                            AppTextFormField(
+                              label: "البريد الالكتروني",
+                              controller: emailController,
+                            ),
+                            const Gap(6),
+                            Text(
+                              "كلمة المرور",
+                              style: AppTextStyle.semiBold20.copyWith(
+                                color: AppColors.primary,
+                              ),
+                            ),
+                            const Gap(4),
+                            AppTextFormField(
+                              label: "كلمة المرور",
+                              controller: passwordController,
+                              isPasswordField: true,
+                            ),
+                            const Gap(6),
+                            Text(
+                              "تأكيد كلمة المرور",
+                              style: AppTextStyle.semiBold20.copyWith(
+                                color: AppColors.primary,
+                              ),
+                            ),
+                            const Gap(4),
+                            AppTextFormField(
+                              label: "تأكيد كلمة المرور ",
+                              controller: confirmPasswordController,
+                              isPasswordField: true,
+                            ),
+                            const Gap(56),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            AppButtons(
+                              child: const Text(
+                                "التالي",
+                                style: AppTextStyle.semiBold18,
+                              ),
+                              onPressed: () {
+                                context.read<AuthCubit>().user = context
+                                    .read<AuthCubit>()
+                                    .user
+                                    .copyWith(
+                                      username: userNameController.text,
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                    );
+                                AppNavigation.pushName(
+                                  context: context,
+                                  route: AppRoutes.signupStep2,
+                                );
+                              },
+                            ),
+                            const Gap(100),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
