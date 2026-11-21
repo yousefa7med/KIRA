@@ -125,7 +125,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                                       isSeccess
                                           ? AppNavigation.pushName(
                                               context: context,
-                                              route: AppRoutes.signupStep1,
+                                              route: AppRoutes.otp,
                                             )
                                           : ScaffoldMessenger.of(
                                               context,
