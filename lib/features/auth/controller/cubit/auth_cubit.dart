@@ -14,10 +14,19 @@ class AuthCubit extends Cubit<AuthState> {
     return true;
   }
 
-  bool signup() {
+  Future<bool> signup() async {
     emit(state.copyWith(activeAction: AuthAction.signup));
 
-    Future.delayed(const Duration(seconds: 2), () {});
+    await Future.delayed(const Duration(seconds: 2), () {});
+    emit(state.copyWith(activeAction: AuthAction.idle));
+
+    return true;
+  }
+
+  Future<bool> changePassword(String newPassword) async {
+    emit(state.copyWith(activeAction: AuthAction.changePassword));
+
+    await Future.delayed(const Duration(seconds: 2), () {});
     emit(state.copyWith(activeAction: AuthAction.idle));
 
     return true;

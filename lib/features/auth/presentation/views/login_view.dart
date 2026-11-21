@@ -109,15 +109,21 @@ class _LoginViewState extends State<LoginView> {
                                 isPasswordField: true,
                                 controller: passwordController,
                               ),
-                              const Gap(2),
+                              const Gap(4),
 
                               Align(
                                 alignment: AlignmentGeometry.centerRight,
-                                child: Text(
-                                  "هل نسيت كلمة المرور؟",
-                                  style: AppTextStyle.semiBold12.copyWith(
-                                    color: AppColors.primary,
-                                    decoration: TextDecoration.underline,
+                                child: GestureDetector(
+                                  onTap: () => AppNavigation.pushName(
+                                    context: context,
+                                    route: AppRoutes.changePassword,
+                                  ),
+                                  child: Text(
+                                    "هل نسيت كلمة المرور؟",
+                                    style: AppTextStyle.semiBold12.copyWith(
+                                      color: AppColors.primary,
+                                      decoration: TextDecoration.underline,
+                                    ),
                                   ),
                                 ),
                               ),

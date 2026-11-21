@@ -28,6 +28,10 @@ class Assets {
 
   static const String iconsX = "assets/icons/X.svg";
 
+  static const String illustrationsOTPIllustration = "assets/illustrations/OTP_illustration.svg";
+
+  static const String illustrationsPasswordIllustration = "assets/illustrations/password_illustration.svg";
+
   static const String logoGoogleIMG = "assets/logo/googleIMG.png";
 
   static const String logoKiraSymbol = "assets/logo/kira-symbol.svg";

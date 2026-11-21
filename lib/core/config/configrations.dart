@@ -1,3 +1,5 @@
+import 'package:kira/features/auth/presentation/views/change_password_view.dart';
+import 'package:kira/features/auth/presentation/views/otp_view.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kira/core/transitions/page_route_builder_method.dart';
@@ -51,6 +53,21 @@ class AppRouter {
                 child: const SignupStepThreeView(),
               ),
         );
+      case AppRoutes.changePassword:
+        return pageRouteBuilderMethod(
+          settings: settings,
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              BlocProvider.value(
+                value: authCubit,
+                child: const ChangePasswordView(),
+              ),
+        );
+      case AppRoutes.otp:
+        return pageRouteBuilderMethod(
+          settings: settings,
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              BlocProvider.value(value: authCubit, child: const OtpView()),
+        );
 
       default:
         return pageRouteBuilderMethod(
@@ -65,6 +82,8 @@ class AppRouter {
 abstract class AppRoutes {
   static const String mainView = '/';
   static const String login = '/login';
+  static const String otp = '/otp';
+  static const String changePassword = '/changePassword';
   static const String signupStep1 = '/signupStep1';
   static const String signupStep2 = '/signupStep2';
   static const String signupStep3 = '/signupStep3';
