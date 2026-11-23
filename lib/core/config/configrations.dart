@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:kira/core/di/di.dart';
+import 'package:kira/features/auth/presentation/flow/auth_flow.dart';
 import 'package:kira/features/auth/presentation/views/change_password_view.dart';
 import 'package:kira/features/auth/presentation/views/otp_view.dart';
 import 'package:material_ui/material_ui.dart';
@@ -9,10 +13,9 @@ import 'package:kira/features/auth/presentation/views/signup_step_one_view.dart'
 import 'package:kira/features/auth/presentation/views/signup_step_three_view.dart';
 import 'package:kira/features/auth/presentation/views/signup_step_two_view.dart';
 
-final authCubit = AuthCubit();
-
-class AppRouter {
+abstract class AppRouter {
   static Route? generateRoute(RouteSettings settings) {
+    log(settings.name ?? "nulls");
     switch (settings.name) {
       // case AppRoutes.mainView:
       //   return pageRouteBuilderMethod(
@@ -20,53 +23,61 @@ class AppRouter {
       //     pageBuilder: (context, animation, secondaryAnimation) =>
       //         const MainView(),
       //   );
+      case AppRoutes.authFlow:
+        return pageRouteBuilderMethod(
+          settings: settings,
+          pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
+            create: (context) => getIt<AuthCubit>(),
+            child: AuthFlow(),
+          ),
+        );
+
+      default:
+        return pageRouteBuilderMethod(
+          settings: settings,
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const Scaffold(),
+        );
+    }
+  }
+
+  static Route? generateAuthRoute(RouteSettings settings) {
+    switch (settings.name) {
       case AppRoutes.login:
         return pageRouteBuilderMethod(
           settings: settings,
           pageBuilder: (context, animation, secondaryAnimation) =>
-              BlocProvider.value(value: authCubit, child: const LoginView()),
+              const LoginView(),
         );
       case AppRoutes.signupStep1:
         return pageRouteBuilderMethod(
           settings: settings,
           pageBuilder: (context, animation, secondaryAnimation) =>
-              BlocProvider.value(
-                value: authCubit,
-                child: const SignupStepOneView(),
-              ),
+              const SignupStepOneView(),
         );
       case AppRoutes.signupStep2:
         return pageRouteBuilderMethod(
           settings: settings,
           pageBuilder: (context, animation, secondaryAnimation) =>
-              BlocProvider.value(
-                value: authCubit,
-                child: const SignupStepTwoView(),
-              ),
+              const SignupStepTwoView(),
         );
       case AppRoutes.signupStep3:
         return pageRouteBuilderMethod(
           settings: settings,
           pageBuilder: (context, animation, secondaryAnimation) =>
-              BlocProvider.value(
-                value: authCubit,
-                child: const SignupStepThreeView(),
-              ),
+              const SignupStepThreeView(),
         );
       case AppRoutes.changePassword:
         return pageRouteBuilderMethod(
           settings: settings,
           pageBuilder: (context, animation, secondaryAnimation) =>
-              BlocProvider.value(
-                value: authCubit,
-                child: const ChangePasswordView(),
-              ),
+              const ChangePasswordView(),
         );
       case AppRoutes.otp:
         return pageRouteBuilderMethod(
           settings: settings,
           pageBuilder: (context, animation, secondaryAnimation) =>
-              BlocProvider.value(value: authCubit, child: const OtpView()),
+              const OtpView(),
         );
 
       default:
@@ -80,8 +91,9 @@ class AppRouter {
 }
 
 abstract class AppRoutes {
-  static const String mainView = '/';
-  static const String login = '/login';
+  // static const String mainView = '/';
+  static const String authFlow = '/';
+  static const String login = '/';
   static const String otp = '/otp';
   static const String changePassword = '/changePassword';
   static const String signupStep1 = '/signupStep1';

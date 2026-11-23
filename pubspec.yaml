@@ -39,6 +39,7 @@ dependencies:
   flutter_otp_text_field: ^2.0.1
   flutter_svg: ^2.3.2
   gap: ^3.1.0
+  get_it: ^9.3.0
   material_ui: ^1.11.1
   phone_form_field: 11.0.1
 dev_dependencies:

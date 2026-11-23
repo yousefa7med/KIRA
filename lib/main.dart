@@ -1,10 +1,12 @@
 import 'package:flutter_country_selector/flutter_country_selector.dart';
 import 'package:kira/core/config/configrations.dart';
+import 'package:kira/core/di/di.dart';
 import 'package:kira/core/utilities/app_theme.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 
 void main() {
+  setupDependencies();
   runApp(const Kira());
 }
 
@@ -36,7 +38,7 @@ class Kira extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: AppTheme.lightTheme,
       onGenerateRoute: AppRouter.generateRoute,
-      initialRoute: AppRoutes.login,
+      initialRoute: AppRoutes.authFlow,
     );
   }
 }
