@@ -6,7 +6,7 @@ class DioClient {
   DioClient() {
     dio = Dio(
       BaseOptions(
-        baseUrl: "https://kira-api.runasp.net",
+        baseUrl: "https://kira-api.runasp.net/api/account",
         connectTimeout: const Duration(seconds: 15),
         sendTimeout: const Duration(seconds: 15),
         receiveTimeout: const Duration(seconds: 15),
