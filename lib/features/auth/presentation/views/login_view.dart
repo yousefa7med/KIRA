@@ -218,7 +218,12 @@ class _LoginViewState extends State<LoginView> {
                           ),
 
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              AppNavigation.pushName(
+                                context: context,
+                                route: AppRoutes.signupStep1,
+                              );
+                            },
                             child: Column(
                               children: [
                                 Text(
