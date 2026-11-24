@@ -1,10 +1,16 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kira/core/utilities/App_colors.dart';
 import 'package:kira/core/utilities/app_text_style.dart';
+import 'package:kira/features/auth/controller/cubit/auth_cubit.dart';
 import 'package:material_ui/material_ui.dart';
 
 class MultiChoiceChips extends StatefulWidget {
-  const MultiChoiceChips({super.key, required this.options});
-
+  const MultiChoiceChips({
+    super.key,
+    required this.options,
+    required this.enabled,
+  });
+  final bool enabled;
   final List<String> options;
 
   @override
@@ -24,10 +30,12 @@ class _MultiChoiceChipsState extends State<MultiChoiceChips> {
     if (selectedList[index]) {
       setState(() {
         selectedList[index] = false;
+        context.read<AuthCubit>().user!.interests.remove(widget.options[index]);
       });
     } else {
       setState(() {
         selectedList[index] = true;
+        context.read<AuthCubit>().user!.interests.add(widget.options[index]);
       });
     }
   }
@@ -40,10 +48,11 @@ class _MultiChoiceChipsState extends State<MultiChoiceChips> {
       children: List.generate(
         widget.options.length,
         (index) => ChoiceChip(
+          disabledColor: AppColors.white,
           label: Text(widget.options[index], style: AppTextStyle.medium14),
           selected: selectedList[index],
           showCheckmark: false,
-          onSelected: (_) => _toggleOption(index),
+          onSelected: widget.enabled ? (_) => _toggleOption(index) : null,
           backgroundColor: AppColors.white,
           selectedColor: AppColors.primary,
           side: BorderSide(

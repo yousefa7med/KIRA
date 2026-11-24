@@ -1,13 +1,15 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:kira/core/utilities/App_colors.dart';
 import 'package:kira/core/utilities/app_text_style.dart';
 import 'package:kira/core/utilities/assets.dart';
+import 'package:kira/features/auth/controller/cubit/auth_cubit.dart';
 import 'package:material_ui/material_ui.dart';
 
 class AppDatePicker extends StatefulWidget {
-  const AppDatePicker({super.key});
-
+  const AppDatePicker({super.key, required this.enabled});
+  final bool enabled;
   @override
   State<AppDatePicker> createState() => _AppDatePickerState();
 }
@@ -24,17 +26,24 @@ class _AppDatePickerState extends State<AppDatePicker> {
     setState(() {
       pickedDate = date;
     });
+    context.read<AuthCubit>().user = context.read<AuthCubit>().user!.copyWith(
+      birthDate: date.toString(),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () => _pickDate(context),
+      onPressed: widget.enabled ? () => _pickDate(context) : null,
       style: OutlinedButton.styleFrom(
         backgroundColor: AppColors.white,
-        foregroundColor: AppColors.primary,
+        foregroundColor: widget.enabled
+            ? AppColors.primary
+            : AppColors.lightGrey,
         side: BorderSide(
-          color: AppColors.primary,
+          color: widget.enabled
+              ? (pickedDate == null ? AppColors.line : AppColors.primary)
+              : AppColors.lightGrey,
           width: pickedDate == null ? 1.5 : 2,
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
@@ -46,8 +55,10 @@ class _AppDatePickerState extends State<AppDatePicker> {
           SvgPicture.asset(
             Assets.iconsCalender,
             height: 24,
-            colorFilter: const ColorFilter.mode(
-              AppColors.primary,
+            colorFilter: ColorFilter.mode(
+              widget.enabled
+                  ? (pickedDate == null ? AppColors.line : AppColors.primary)
+                  : AppColors.lightGrey,
               BlendMode.srcIn,
             ),
           ),
@@ -57,7 +68,11 @@ class _AppDatePickerState extends State<AppDatePicker> {
               pickedDate == null
                   ? 'يوم / شهر / سنة'
                   : '${pickedDate!.day}/${pickedDate!.month}/${pickedDate!.year}',
-              style: AppTextStyle.semiBold16,
+              style: AppTextStyle.semiBold16.copyWith(
+                color: widget.enabled
+                    ? (pickedDate == null ? AppColors.line : AppColors.primary)
+                    : AppColors.grey,
+              ),
             ),
           ),
         ],

@@ -1,8 +1,8 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 
-class KiraPhoneField extends StatefulWidget {
-  const KiraPhoneField({
+class AppPhoneField extends StatefulWidget {
+  const AppPhoneField({
     super.key,
     this.controller,
     this.onChanged,
@@ -16,10 +16,10 @@ class KiraPhoneField extends StatefulWidget {
   final bool enabled;
 
   @override
-  State<KiraPhoneField> createState() => _KiraPhoneFieldState();
+  State<AppPhoneField> createState() => _AppPhoneFieldState();
 }
 
-class _KiraPhoneFieldState extends State<KiraPhoneField> {
+class _AppPhoneFieldState extends State<AppPhoneField> {
   late final PhoneController _controller;
   late final bool _ownsController;
 
