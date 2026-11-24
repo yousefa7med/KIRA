@@ -12,12 +12,17 @@ sealed class AuthState {
   bool isLoading(AuthAction action) => activeAction == action;
 
   AuthState copyWith({AuthAction? activeAction}) {
-    return AuthAct(activeAction: activeAction ?? this.activeAction);
+    return AuthActionState(activeAction: activeAction ?? this.activeAction);
   }
 }
 
 final class AuthInitial extends AuthState {}
 
-final class AuthAct extends AuthState {
-  AuthAct({super.activeAction});
+final class AuthActionState extends AuthState {
+  AuthActionState({super.activeAction});
+}
+
+final class AuthFailure extends AuthState {
+  final String message;
+  AuthFailure({super.activeAction, required this.message});
 }

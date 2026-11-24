@@ -2,7 +2,6 @@ abstract class Validator {
   static bool _isEmail(String? email) {
     const pattern =
         r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z]{2,})+$";
-
     return RegExp(pattern).hasMatch(email ?? "");
   }
 
