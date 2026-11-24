@@ -9,7 +9,7 @@ final getIt = GetIt.instance;
 Future<void> setupDependencies() async {
   getIt.registerLazySingleton<DioClient>(() => DioClient());
   getIt.registerLazySingleton<AuthRemoteDataSource>(
-    () => AuthRemoteDataSourceImp(dio: getIt()),
+    () => AuthRemoteDataSourceImp(dio: getIt<DioClient>().dio),
   );
   getIt.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImp(dataSource: getIt()),

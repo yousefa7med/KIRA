@@ -14,6 +14,7 @@ class AppTextFormField extends StatefulWidget {
     this.isPasswordField = false,
     this.onChange,
     required this.label,
+    this.enabled = true,
   });
   final TextEditingController? controller;
   final String? Function(String?)? validator;
@@ -22,6 +23,7 @@ class AppTextFormField extends StatefulWidget {
   final bool isPasswordField;
   final void Function(String)? onChange;
   final String label;
+  final bool enabled;
   @override
   State<AppTextFormField> createState() => _AppTextFormFieldState();
 }
@@ -31,6 +33,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: widget.enabled,
       style: AppTextStyle.regular14,
       controller: widget.controller,
       validator: widget.validator,
@@ -72,9 +75,17 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           borderRadius: BorderRadius.all(Radius.circular(8)),
           borderSide: BorderSide(color: AppColors.error, width: 2),
         ),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          borderSide: BorderSide(color: AppColors.error, width: 2),
+        ),
         focusedBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
           borderSide: BorderSide(color: AppColors.primary, width: 2),
+        ),
+        disabledBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          borderSide: BorderSide(color: AppColors.lightGrey, width: 1),
         ),
         labelText: widget.label,
         labelStyle: AppTextStyle.regular16.copyWith(color: AppColors.lightGrey),

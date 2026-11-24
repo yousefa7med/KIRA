@@ -1,4 +1,5 @@
 import 'package:kira/core/utilities/validators.dart';
+import 'package:kira/features/auth/data/models/signup_model.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -106,6 +107,7 @@ class _LoginViewState extends State<LoginView> {
                                     label: "البريد الالكتروني",
                                     controller: emailController,
                                     validator: Validator.emailValidator(),
+                                    enabled: !state.isBusy,
                                   ),
                                   const Gap(6),
                                   Align(
@@ -122,6 +124,7 @@ class _LoginViewState extends State<LoginView> {
                                   const Gap(4),
                                   AppTextFormField(
                                     label: "كلمة المرور",
+                                    enabled: !state.isBusy,
                                     isPasswordField: true,
                                     controller: passwordController,
                                     validator:
@@ -132,10 +135,13 @@ class _LoginViewState extends State<LoginView> {
                                   Align(
                                     alignment: AlignmentGeometry.centerRight,
                                     child: GestureDetector(
-                                      onTap: () => AppNavigation.pushName(
-                                        context: context,
-                                        route: AppRoutes.changePassword,
-                                      ),
+                                      onTap: () {
+                                        FocusScope.of(context).unfocus();
+                                        AppNavigation.pushName(
+                                          context: context,
+                                          route: AppRoutes.changePassword,
+                                        );
+                                      },
                                       child: Text(
                                         "هل نسيت كلمة المرور؟",
                                         style: AppTextStyle.semiBold12.copyWith(
@@ -163,11 +169,17 @@ class _LoginViewState extends State<LoginView> {
                                                     passwordController.text,
                                                   );
                                               isSeccess
-                                                  ? AppNavigation.pushName(
-                                                      context: context,
-                                                      route:
-                                                          AppRoutes.signupStep1,
-                                                    )
+                                                  ? {
+                                                      FocusScope.of(
+                                                        context,
+                                                      ).unfocus(),
+
+                                                      AppNavigation.pushName(
+                                                        context: context,
+                                                        route: AppRoutes
+                                                            .signupStep1,
+                                                      ),
+                                                    }
                                                   : ScaffoldMessenger.of(
                                                       context,
                                                     ).showSnackBar(
@@ -197,11 +209,31 @@ class _LoginViewState extends State<LoginView> {
                                                     .read<AuthCubit>()
                                                     .signinWithGoogle();
                                                 isSeccess
-                                                    ? AppNavigation.pushName(
-                                                        context: context,
-                                                        route: AppRoutes
-                                                            .signupStep2,
-                                                      )
+                                                    ? {
+                                                        context
+                                                            .read<AuthCubit>()
+                                                            .user = SignUpModel(
+                                                          username: '',
+                                                          email: '',
+                                                          password: '',
+                                                          phoneNumber: '',
+                                                          birthDate: '',
+                                                          interests: [],
+                                                          industry: '',
+                                                          businessDomain: '',
+                                                          jobTitle: '',
+                                                          companyName: '',
+                                                        ),
+                                                        FocusScope.of(
+                                                          context,
+                                                        ).unfocus(),
+
+                                                        AppNavigation.pushName(
+                                                          context: context,
+                                                          route: AppRoutes
+                                                              .signupStep2,
+                                                        ),
+                                                      }
                                                     : ScaffoldMessenger.of(
                                                         context,
                                                       ).showSnackBar(
@@ -234,6 +266,20 @@ class _LoginViewState extends State<LoginView> {
 
                               GestureDetector(
                                 onTap: () {
+                                  context.read<AuthCubit>().user = SignUpModel(
+                                    username: '',
+                                    email: '',
+                                    password: '',
+                                    phoneNumber: '',
+                                    birthDate: '',
+                                    interests: [],
+                                    industry: '',
+                                    businessDomain: '',
+                                    jobTitle: '',
+                                    companyName: '',
+                                  );
+                                  FocusScope.of(context).unfocus();
+
                                   AppNavigation.pushName(
                                     context: context,
                                     route: AppRoutes.signupStep1,

@@ -9,7 +9,7 @@ class AuthCubit extends Cubit<AuthState> {
   final AuthRepository _authRepository;
 
   AuthCubit({required this._authRepository}) : super(AuthInitial());
-  SignUpModel user = SignUpModel();
+  late SignUpModel? user;
   Future<bool> login(String email, String password) async {
     emit(AuthActionState(activeAction: AuthAction.login));
     final result = await _authRepository.login(email, password);
@@ -30,7 +30,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<bool> signup() async {
     emit(AuthActionState(activeAction: AuthAction.signup));
-    final result = await _authRepository.signup(user);
+    final result = await _authRepository.signup(user!);
     switch (result) {
       case Success():
         emit(AuthActionState(activeAction: AuthAction.idle));
