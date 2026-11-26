@@ -13,6 +13,7 @@ class AppDropDownMenu extends FormField<String> {
   final String emptyText;
   final ValueChanged<String?>? onChanged;
   final double maxMenuHeight;
+  final TextEditingController controller;
 
   AppDropDownMenu({
     super.key,
@@ -26,9 +27,11 @@ class AppDropDownMenu extends FormField<String> {
     super.validator,
     super.enabled,
     AutovalidateMode super.autovalidateMode = AutovalidateMode.disabled,
+    required this.controller,
   }) : super(
          builder: (field) {
            return _SearchableDropdownControl(
+             controller: controller,
              items: items,
              value: field.value,
              hintText: hintText,
@@ -47,6 +50,8 @@ class AppDropDownMenu extends FormField<String> {
 }
 
 class _SearchableDropdownControl extends StatefulWidget {
+  final TextEditingController controller;
+
   final List<String> items;
   final String? value;
   final String hintText;
@@ -67,6 +72,7 @@ class _SearchableDropdownControl extends StatefulWidget {
     required this.enabled,
     required this.maxMenuHeight,
     required this.onChanged,
+    required this.controller,
   });
 
   @override
@@ -76,7 +82,6 @@ class _SearchableDropdownControl extends StatefulWidget {
 
 class _SearchableDropdownControlState
     extends State<_SearchableDropdownControl> {
-  final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   final LayerLink _layerLink = LayerLink();
 
@@ -97,7 +102,6 @@ class _SearchableDropdownControlState
   @override
   void initState() {
     super.initState();
-    _controller.text = widget.value ?? '';
     _buildIndex();
     _focusNode.addListener(_handleFocusChange);
   }
@@ -107,7 +111,7 @@ class _SearchableDropdownControlState
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.value != widget.value && !_isOpen) {
-      _controller.text = widget.value ?? '';
+      widget.controller.text = widget.value ?? '';
     }
 
     if (oldWidget.enabled && !widget.enabled && _isOpen) {
@@ -162,7 +166,7 @@ class _SearchableDropdownControlState
     setState(() {
       _isOpen = true;
       _filtered = widget.items;
-      _controller.clear();
+      widget.controller.clear();
     });
 
     _focusNode.requestFocus();
@@ -321,7 +325,7 @@ class _SearchableDropdownControlState
 
     setState(() {
       _isOpen = false;
-      _controller.text = item;
+      widget.controller.text = item;
     });
 
     _focusNode.unfocus();
@@ -334,7 +338,7 @@ class _SearchableDropdownControlState
 
     setState(() {
       _isOpen = false;
-      _controller.text = widget.value ?? '';
+      widget.controller.text = widget.value ?? '';
     });
 
     _focusNode.unfocus();
@@ -359,7 +363,6 @@ class _SearchableDropdownControlState
   void dispose() {
     _removeOverlay();
     _focusNode.removeListener(_handleFocusChange);
-    _controller.dispose();
     _focusNode.dispose();
     super.dispose();
   }
@@ -377,7 +380,7 @@ class _SearchableDropdownControlState
       child: CompositedTransformTarget(
         link: _layerLink,
         child: TextField(
-          controller: _controller,
+          controller: widget.controller,
           focusNode: _focusNode,
           readOnly: !_isOpen,
           enabled: widget.enabled,

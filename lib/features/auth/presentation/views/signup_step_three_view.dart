@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,10 +22,11 @@ class SignupStepThreeView extends StatefulWidget {
 }
 
 class _SignupStepThreeViewState extends State<SignupStepThreeView> {
-  late final TextEditingController userNameController;
-  late final TextEditingController emailController;
-  late final TextEditingController passwordController;
-  late final TextEditingController confirmPasswordController;
+  late final TextEditingController industrieController;
+  late final TextEditingController businessDomainController;
+  late final TextEditingController jobTitleController;
+  late final TextEditingController companyNameController;
+
   late final GlobalKey<FormState> formKey;
   List<String> industries = [
     'التجارة والتجزئة',
@@ -97,11 +100,12 @@ class _SignupStepThreeViewState extends State<SignupStepThreeView> {
   ];
   @override
   void initState() {
-    final user = context.read<AuthCubit>().user;
-    userNameController = TextEditingController(text: user.username);
-    emailController = TextEditingController(text: user.email);
-    passwordController = TextEditingController(text: user.password);
-    confirmPasswordController = TextEditingController(text: user.password);
+    final user = context.read<AuthCubit>().user!;
+    industrieController = TextEditingController(text: user.industry);
+    businessDomainController = TextEditingController(text: user.businessDomain);
+    jobTitleController = TextEditingController(text: user.jobTitle);
+    companyNameController = TextEditingController(text: user.companyName);
+
     formKey = GlobalKey<FormState>();
 
     super.initState();
@@ -109,10 +113,11 @@ class _SignupStepThreeViewState extends State<SignupStepThreeView> {
 
   @override
   void dispose() {
-    userNameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
+    industrieController.dispose();
+    businessDomainController.dispose();
+    companyNameController.dispose();
+    jobTitleController.dispose();
+
     super.dispose();
   }
 
@@ -171,6 +176,7 @@ class _SignupStepThreeViewState extends State<SignupStepThreeView> {
                               AppDropDownMenu(
                                 items: industries,
                                 hintText: "مجال العمل (Industry)",
+                                controller: industrieController,
                               ),
                               const Gap(6),
                               Text(
@@ -183,6 +189,7 @@ class _SignupStepThreeViewState extends State<SignupStepThreeView> {
                               AppDropDownMenu(
                                 items: businessDomains,
                                 hintText: "النشاط التجاري (Business Domain)",
+                                controller: businessDomainController,
                               ),
                               const Gap(6),
                               Text(
@@ -194,7 +201,7 @@ class _SignupStepThreeViewState extends State<SignupStepThreeView> {
                               const Gap(4),
                               AppTextFormField(
                                 label: "المسمي الوظيفي",
-                                controller: passwordController,
+                                controller: jobTitleController,
                               ),
                               const Gap(6),
                               Text(
@@ -206,7 +213,7 @@ class _SignupStepThreeViewState extends State<SignupStepThreeView> {
                               const Gap(4),
                               AppTextFormField(
                                 label: "اسم الشركة",
-                                controller: confirmPasswordController,
+                                controller: companyNameController,
                               ),
                               const Gap(56),
                             ],
@@ -220,13 +227,15 @@ class _SignupStepThreeViewState extends State<SignupStepThreeView> {
                                 style: AppTextStyle.semiBold18,
                               ),
                               onPressed: () {
+                                log(industrieController.text);
+                                log(jobTitleController.text);
+
                                 context.read<AuthCubit>().user = context
                                     .read<AuthCubit>()
-                                    .user
+                                    .user!
                                     .copyWith(
-                                      username: userNameController.text,
-                                      email: emailController.text,
-                                      password: passwordController.text,
+                                      jobTitle: jobTitleController.text,
+                                      companyName: companyNameController.text,
                                     );
                               },
                             ),
